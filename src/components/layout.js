@@ -4,6 +4,7 @@ import React from "react";
 import { colors } from "../styles/colors";
 import Footer from "./footer";
 import Header from "./header";
+import Seo from "./seo";
 
 const pageStyles = {
   color: colors.darkest,
@@ -35,7 +36,7 @@ const Layout = ({ children }) => (
     render={(data) => (
       <main style={pageStyles}>
         <title>{data.site.siteMetadata.title}</title>
-        {/* <SEO /> */}
+        <Seo />
         <Header siteTitle={data.site.siteMetadata.title} />
         <div style={contentStyles}>{children}</div>
         <Footer />

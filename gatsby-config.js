@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: "Imma Let You Fipsum",
     description: `Relive an infamous time in pop culture history while generating "Lorem Ipsum Style" placeholder text for your website, advertisement, or anything else you may be working on.`,
-    image: `https://imma-let-you-finish.joshglazer.com/images/open-graph.png`,
+    image: `https://imma-let-you-finish.joshglazer.com/open-graph.png`,
     author: `@glazerade`,
   },
   plugins: [
@@ -16,12 +16,12 @@ module.exports = {
     },
     "gatsby-plugin-react-helmet",
     // "gatsby-plugin-sitemap",
-    // {
-    //   resolve: "gatsby-plugin-manifest",
-    //   options: {
-    //     icon: "src/images/icon.png",
-    //   },
-    // },
+    {
+      resolve: "gatsby-plugin-manifest",
+      options: {
+        icon: "src/images/icon.png",
+      },
+    },
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     {
