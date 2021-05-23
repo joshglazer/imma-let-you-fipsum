@@ -24,6 +24,7 @@ module.exports = {
     },
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
+    "gatsby-plugin-breakpoints",
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -35,7 +36,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [`Inconsolata:200,400, 700`, `PT Sans`],
+        fonts: [`Inconsolata:200,400,700,900`, `PT Sans`],
         display: "swap",
       },
     },
