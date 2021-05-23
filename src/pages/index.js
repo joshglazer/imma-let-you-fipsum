@@ -2,11 +2,27 @@ import React, { useState } from "react";
 import { generateParagraph } from "../api/quotes";
 import Layout from "../components/layout";
 import { colors } from "../styles/colors";
+import KanyeInterruptingImg from "../images/kanye-interrupting.png";
 
 const buttonStyles = {
   backgroundColor: colors.light,
   borderColor: colors.dark,
   fontFamily: "'Inconsolata', monospace",
+};
+const kanyeInterruptingStyles = {
+  position: "absolute",
+  bottom: 0,
+  right: 0,
+  height: 511,
+  width: 392,
+  transition: ["all"],
+  transitionDuration: "200ms",
+};
+
+const kanyeInterruptingHiddenStyles = {
+  ...kanyeInterruptingStyles,
+  height: 0,
+  width: 0,
 };
 const placeholderTextStyles = {
   borderTop: `1px solid ${colors.dark}`,
@@ -25,14 +41,17 @@ const quoteStyleMap = {
 const IndexPage = () => {
   const [paragraphs, setParagraphs] = useState([]);
   const [paragraphsCount, setParagraphsCount] = useState(3);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function generateText() {
     const paragraphs = [];
+    setIsLoading(true);
     for (let i = 0; i < paragraphsCount; i++) {
       const paragraph = await generateParagraph();
       paragraphs.push(paragraph);
     }
     setParagraphs(paragraphs);
+    setIsLoading(false);
   }
 
   return (
@@ -66,13 +85,21 @@ const IndexPage = () => {
       </p>
       <button
         style={buttonStyles}
+        disabled={isLoading}
         onClick={() => {
           generateText();
         }}
       >
         Generate Placeholder Text
       </button>
-      {paragraphs.length > 0 && (
+      <img
+        src={KanyeInterruptingImg}
+        style={
+          isLoading ? kanyeInterruptingStyles : kanyeInterruptingHiddenStyles
+        }
+        alt="A picture of Kanye West Interrupting Taylor Swift"
+      />
+      {paragraphs.length > 0 && !isLoading && (
         <div style={placeholderTextStyles}>
           {paragraphs.map((paragraphQuotes, i) => {
             return (
