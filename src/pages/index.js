@@ -4,13 +4,17 @@ import Layout from "../components/layout";
 import { colors } from "../styles/colors";
 import KanyeInterruptingImg from "../images/kanye-interrupting.png";
 
+const paragraphStyles = {
+  marginTop: 0,
+  marginBottom: "1em",
+};
 const buttonStyles = {
   backgroundColor: colors.light,
   borderColor: colors.dark,
   fontFamily: "'Inconsolata', monospace",
 };
 const kanyeInterruptingStyles = {
-  position: "absolute",
+  position: "fixed",
   bottom: 0,
   right: 0,
   height: 511,
@@ -18,7 +22,6 @@ const kanyeInterruptingStyles = {
   transition: ["all"],
   transitionDuration: "200ms",
 };
-
 const kanyeInterruptingHiddenStyles = {
   ...kanyeInterruptingStyles,
   height: 0,
@@ -27,6 +30,7 @@ const kanyeInterruptingHiddenStyles = {
 const placeholderTextStyles = {
   borderTop: `1px solid ${colors.dark}`,
   marginTop: "1em",
+  paddingTop: "1em",
 };
 const quoteKanyeWestStyles = {
   color: colors.dark,
@@ -56,7 +60,7 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <p>
+      <p style={paragraphStyles}>
         On September 13, 2009, the world changed forever. Everyone was tuned
         into the <strong>MTV Video Music Awards</strong>, and was anxiously
         awaiting to hear who would win the award for{" "}
@@ -68,20 +72,20 @@ const IndexPage = () => {
         acceptance speech, <strong>Kanye West</strong> ran onto the stage and
         said{" "}
         <span style={quoteKanyeWestStyles}>
-          "Yo Taylor, I'm really happy for you, I’mma let you finish, but
-          Beyoncé had one of the best videos of all time! One of the best videos
-          of all time!"
+          "Yo Taylor, I'm really happy for you, Imma let you finish, but Beyoncé
+          had one of the best videos of all time! One of the best videos of all
+          time!"
         </span>{" "}
         Then, true to his word, Kanye left the stage and let Taylor finish her
         speech.
       </p>
-      <p>
+      <p style={paragraphStyles}>
         Now you can relive the infamous time in pop culture history while
         generating <strong>"Lorem Ipsum Style"</strong> placeholder text for
         your website, advertisement, or anything else you may be working on by
         clicking the button below. The placeholder text will contain a few
         quotes by <strong>Taylor Swift</strong>, but one{" "}
-        <strong>Kanye West quote</strong> will interrupt each paragraph.
+        <strong>Kanye West</strong> quote will interrupt each paragraph.
       </p>
       <button
         style={buttonStyles}
@@ -97,13 +101,13 @@ const IndexPage = () => {
         style={
           isLoading ? kanyeInterruptingStyles : kanyeInterruptingHiddenStyles
         }
-        alt="A picture of Kanye West Interrupting Taylor Swift"
+        alt="Kanye West Interrupting Taylor Swift"
       />
       {paragraphs.length > 0 && !isLoading && (
         <div style={placeholderTextStyles}>
           {paragraphs.map((paragraphQuotes, i) => {
             return (
-              <p key={i}>
+              <p key={i} style={paragraphStyles}>
                 {paragraphQuotes.map((paragraphQuote, i) => {
                   return (
                     <span key={i} style={quoteStyleMap[paragraphQuote.type]}>

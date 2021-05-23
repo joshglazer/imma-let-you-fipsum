@@ -1,4 +1,5 @@
 import React from "react";
+import { useBreakpoint } from "gatsby-plugin-breakpoints";
 
 const headingStyles = {
   margin: 0,
@@ -9,6 +10,19 @@ const headingStyles = {
   padding: 10,
 };
 
-const Header = ({ siteTitle }) => <h1 style={headingStyles}>{siteTitle}</h1>;
+const headingStylesMobile = {
+  ...headingStyles,
+  fontSize: "2em",
+};
+
+const Header = ({ siteTitle }) => {
+  const breakpoints = useBreakpoint();
+
+  return (
+    <h1 style={breakpoints.sm ? headingStylesMobile : headingStyles}>
+      {siteTitle}
+    </h1>
+  );
+};
 
 export default Header;
