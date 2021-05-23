@@ -3,7 +3,7 @@ module.exports = {
     title: "Imma Let You Fipsum",
   },
   plugins: [
-    "gatsby-plugin-sass",
+    `gatsby-plugin-sass`,
     "gatsby-plugin-image",
     {
       resolve: "gatsby-plugin-google-analytics",
@@ -28,6 +28,13 @@ module.exports = {
         path: "./src/images/",
       },
       __key: "images",
+    },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [`Inconsolata:200,400, 700`, `PT Sans`],
+        display: "swap",
+      },
     },
   ],
 };
