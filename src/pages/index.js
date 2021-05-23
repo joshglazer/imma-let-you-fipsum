@@ -101,7 +101,9 @@ const IndexPage = () => {
           Now you can relive the infamous time in pop culture history while
           generating <strong>"Lorem Ipsum Style"</strong> placeholder text for
           your website, advertisement, or anything else you may be working on by
-          clicking the button below.
+          clicking the button below. The placeholder text will contain a few
+          quotes by <strong>Taylor Swift</strong>, but one{" "}
+          <strong>Kanye West quote</strong> will interrupt each paragraph.
         </p>
         <button
           style={buttonStyles}
