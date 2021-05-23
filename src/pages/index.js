@@ -34,9 +34,6 @@ const IndexPage = () => {
     const paragraphs = [];
     for (let i = 0; i < paragraphsCount; i++) {
       const paragraph = await generateParagraph();
-      console.log("Paragraph", paragraph);
-      // const quote = await getQuote("taylor swift");
-      // const quote2 = await getQuote("kanye west");
       paragraphs.push(paragraph);
     }
     setParagraphs(paragraphs);
@@ -63,8 +60,6 @@ const IndexPage = () => {
         return (
           <p key={i}>
             {paragraphQuotes.map((paragraphQuote, i) => {
-              console.log("quote", quoteStyleMap[paragraphQuote.type]);
-
               return (
                 <span key={i} style={quoteStyleMap[paragraphQuote.type]}>
                   {paragraphQuote.quote}

@@ -8,9 +8,10 @@ const typeApiMap = {
 
 const KANYE_QUOTE_PREFIX = "Imma let you finish but";
 const KANYE_QUOTE_SKIP_TRANSFORMATION = ["I", "George", "I'm", "I'd"];
+const QUOTE_ENDING_PUNCTUATION = [".", "!", "?"];
 
 // getQuote returns one quote that can be used in a paragraph
-function getQuote(type) {
+function _getQuote(type) {
   // determine which endpoint to hit depending on type
   let apiEndpointUrl;
   try {
@@ -40,10 +41,10 @@ export async function generateParagraph() {
 
   // build an array of api calls for quotes
   for (let i = 0; i < taylorSwiftQuoteCount; i++) {
-    apiCalls.push(getQuote("taylor swift"));
+    apiCalls.push(_getQuote("taylor swift"));
   }
   for (let i = 0; i < kanyeQuoteCount; i++) {
-    apiCalls.push(getQuote("kanye west"));
+    apiCalls.push(_getQuote("kanye west"));
   }
 
   // Wait until all api calls finish
@@ -61,7 +62,11 @@ export async function generateParagraph() {
     // Add a space to the end of all quotes except for the last one
     return quotes.map((quote, index) => {
       if (index < quotes.length - 1) {
-        if (!quote.quote.endsWith(".")) {
+        if (
+          !QUOTE_ENDING_PUNCTUATION.includes(
+            quote.quote[quote.quote.length - 1]
+          )
+        ) {
           quote.quote += ".";
         }
         quote.quote += " ";
