@@ -1,5 +1,5 @@
-import React from "react";
 import { useBreakpoint } from "gatsby-plugin-breakpoints";
+import React from "react";
 
 const headingStyles = {
   margin: 0,

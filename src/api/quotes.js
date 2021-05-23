@@ -7,7 +7,7 @@ const typeApiMap = {
 };
 
 const KANYE_QUOTE_PREFIX = "Imma let you finish but";
-const KANYE_QUOTE_SKIP_TRANSFORMATION = ["I", "George", "I'm", "I'd"];
+const KANYE_QUOTE_SKIP_TRANSFORMATION = ["I", "I'm", "I'd", "George"];
 const QUOTE_ENDING_PUNCTUATION = [".", "!", "?"];
 
 // getQuote returns one quote that can be used in a paragraph
@@ -91,5 +91,5 @@ function transformKanyeQuote(quote) {
 
 // getRandomNumber returns a random number between the start and stop values
 function getRandomNumber(start, stop) {
-  return Math.floor(Math.random() * (stop - start)) + start;
+  return Math.floor(Math.random() * stop) + start;
 }
