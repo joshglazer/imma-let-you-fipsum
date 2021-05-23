@@ -1,6 +1,9 @@
 module.exports = {
   siteMetadata: {
     title: "Imma Let You Fipsum",
+    description: `Relive an infamous time in pop culture history while generating "Lorem Ipsum Style" placeholder text for your website, advertisement, or anything else you may be working on.`,
+    image: `https://imma-let-you-finish.joshglazer.com/images/open-graph.png`,
+    author: `@glazerade`,
   },
   plugins: [
     `gatsby-plugin-sass`,
