@@ -54,8 +54,13 @@ const IndexPage = () => {
       const paragraph = await generateParagraph();
       paragraphs.push(paragraph);
     }
-    setParagraphs(paragraphs);
-    setIsLoading(false);
+    // Adding a one second timeout here to let people enjoy the loading image that's set up
+    // Now that the taylor swift quotes are stored locally, the api calls do not take long enough
+    // to give the loading image the justice it deserves
+    setTimeout(() => {
+      setParagraphs(paragraphs);
+      setIsLoading(false);
+    }, 500);
   }
 
   return (

@@ -1,3 +1,5 @@
+import { taylorSwiftQuotes } from "../data/taylor-swift";
+
 const TAYLOR_REST_API_ENDPOINT = "https://api.taylor.rest/";
 const KANYE_REST_API_ENDPOINT = "https://api.kanye.rest/";
 
@@ -12,6 +14,15 @@ const QUOTE_ENDING_PUNCTUATION = [".", "!", "?"];
 
 // getQuote returns one quote that can be used in a paragraph
 function _getQuote(type) {
+  // One day after I finished building this app, taylor.rest was taken down and became inactive
+  // I hacked this in place until I can find a better solution
+  if (type === "taylor swift") {
+    const quote = Promise.resolve({
+      quote:
+        taylorSwiftQuotes[Math.floor(Math.random() * taylorSwiftQuotes.length)],
+    });
+    return quote;
+  }
   // determine which endpoint to hit depending on type
   let apiEndpointUrl;
   try {
