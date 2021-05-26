@@ -1,11 +1,18 @@
+import { kanyeWestQuotes } from "../data/kanye-west";
 import { taylorSwiftQuotes } from "../data/taylor-swift";
 
 const TAYLOR_REST_API_ENDPOINT = "https://api.taylor.rest/";
 const KANYE_REST_API_ENDPOINT = "https://api.kanye.rest/";
 
 const typeApiMap = {
-  "taylor swift": TAYLOR_REST_API_ENDPOINT,
-  "kanye west": KANYE_REST_API_ENDPOINT,
+  "taylor swift": {
+    endpoint: TAYLOR_REST_API_ENDPOINT,
+    fallbackData: taylorSwiftQuotes,
+  },
+  "kanye west": {
+    endpoint: KANYE_REST_API_ENDPOINT,
+    fallbackData: kanyeWestQuotes,
+  },
 };
 
 const KANYE_QUOTE_PREFIX = "Imma let you finish but";
@@ -14,19 +21,9 @@ const QUOTE_ENDING_PUNCTUATION = [".", "!", "?"];
 
 // getQuote returns one quote that can be used in a paragraph
 function _getQuote(type) {
-  // One day after I finished building this app, taylor.rest was taken down and became inactive
-  // I hacked this in place until I can find a better solution
-  if (type === "taylor swift") {
-    const quote = Promise.resolve({
-      quote:
-        taylorSwiftQuotes[Math.floor(Math.random() * taylorSwiftQuotes.length)],
-    });
-    return quote;
-  }
-  // determine which endpoint to hit depending on type
   let apiEndpointUrl;
   try {
-    apiEndpointUrl = typeApiMap[type];
+    apiEndpointUrl = typeApiMap[type].endpoint;
   } catch (e) {
     console.error("getQuote()", `No API endpoint defined for ${type}`);
   }
@@ -38,7 +35,24 @@ function _getQuote(type) {
       .then((data) => ({
         ...data,
         type,
-      }));
+      }))
+      // If the api call failed for any reason, pull one of the hardcoded quotes from the locally stored list
+      // and transform it to match the api response
+      .catch(() => {
+        try {
+          const fallbackData = typeApiMap[type].fallbackData;
+          const fallbackQuote = {
+            quote:
+              fallbackData[Math.floor(Math.random() * fallbackData.length)],
+            type,
+          };
+          return fallbackQuote;
+        } catch {
+          console.error(
+            `API Endpoint failed and no fallback Data setup for ${type}`
+          );
+        }
+      });
     return quote;
   }
 }
