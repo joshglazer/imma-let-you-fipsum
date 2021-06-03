@@ -1,54 +1,103 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby minimal starter
-</h1>
+# Imma Let You Fipsum
 
-## 🚀 Quick start
+Imma Let You Fipsum is a React/Gatsby 3 application that lets you relive an infamous time in pop culture history while generating placeholder text.
 
-1.  **Create a Gatsby site.**
+This infamous time is when Kanye West interrupted Taylor Swift at the 2009 MTV Video Music Awards. The application uses a Taylor Swift quote generator to generate Lorem Ipsum style text that consists of a few of her quotes. Each paragraph in the generated text will be interrupted by a Kanye West quote.
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+## Authors
 
-    ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
-    ```
+- [@joshglazer](https://www.github.com/joshglazer)
 
-2.  **Start developing.**
+## Inspiration
 
-    Navigate into your new site’s directory and start it up.
+I sat down at my laptop one night and decided to work on a new project. I usually start by looking through lists of free public APIs to integrate with, and saw that there were APIs for both Kanye West and Taylor Swift quotes. Then I remembered about the time that Kanye interrupted Taylor at the MTV VMAs, and the rest of this app just wrote itself.
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
+## Demo
 
-3.  **Open the code and start customizing!**
+A live demo of Imma Let You Fipsum is available at https://imma-let-you-fipsum.joshglazer.com. This demo is hosted on [Netlify](https://www.netlify.com/) and deployed through a pipeline that is triggered every time code is merged into the main branch of the GitHub repository.
 
-    Your site is now running at http://localhost:8000!
+## Run Locally
 
-    Edit `src/pages/index.js` to see your site update in real-time!
+Clone the project
 
-4.  **Learn more**
+```bash
+  git clone git@github.com:joshglazer/imma-let-you-fipsum.git
+```
 
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+Go to the project directory
 
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+```bash
+  cd imma-let-you-fipsum
+```
 
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+Install dependencies
 
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+```bash
+  npm install
+```
 
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+Start the server
 
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+```bash
+  npm run start
+```
 
-## 🚀 Quick start (Gatsby Cloud)
+## Deployment
 
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
+To deploy this project run
 
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal)
+```bash
+  npm run build
+```
+
+Once this command has been ran, a production build of this application will be available in a folder named `public`. This compiled code can be deployed to any web server.
+
+## Development Process
+
+### Application Architecture
+
+This application was built using the Gatsby framework, so all architecture related to that framework is included in this code repository. The following folders are used to support the built-in Gatsby architecture.
+
+#### API
+
+This folder contains all code needed to retrieve quotes from the 3rd party APIs that this application integrates with. The quotes are also collected, organized and transformed using code in this folder.
+
+#### Components
+
+This folder contains React components that are used throughout the application and its pages.
+
+#### Data
+
+This folder contains two json files that contain Kanye West and Taylor Swift Quotes. I found these quotes in the Github repositories related to the 3rd party APIs that I integrated with. This data is used as a fallback in case the real APIs are not available.
+
+#### Images
+
+This folder contains images that are used throughout the application.
+
+##### Pages
+
+Gatsby automatically sets up routing based on the names of the components stored in this folder. Because this application is very simple and only contains one page, I only included one component for the index page and another to handle 404 errors.
+
+##### Styles
+
+This folder contains a javascript file that stores the color scheme and can be imported into other components. It also contains a global css file.
+
+### Design
+
+I chose a color scheme and design that I thought Kanye West would like. The design is very minimalist and uses a font and design similar to Kanye's website. The beige/tan color scheme is very subtle and matches the outfit that Kanye wore when he announced that he was planning to run for president at the 2015 MTV Video Music Awards.
+
+I also used a picture of Kanye that was taken while he was interrupting Taylor as the loading indicator as a reference to the [meme related to this event](https://knowyourmeme.com/memes/kanye-interrupts-imma-let-you-finish/photos).
+
+### Integrations
+
+This application integrates with [kanye.rest](https://kanye.rest) and [taylor.rest](https://tahlor.rest), which are two different quote generator APIs.
+
+### Challenges
+
+#### Taylor.rest was taken offline.
+
+**Problem:**
+One day after I finished building this application, the taylor.rest API was taken offline. This was obviously a problem, because the application heavily depends on this API for the majority of its functionality.
+
+**Solution**
+I was able to find the [archived Github repository](https://github.com/gillescoolen/taylor.rest) for taylor.rest and copied all of the quotes into this code repository. Then I wrote in some error handling to pull a random quote from that hardcoded data object if the API call returned an error. I decided to set up a similar fallback for the Kanye quotes from the [kanye.rest Github repository](https://github.com/ajzbc/kanye.rest) in case that API goes offline in the future.
