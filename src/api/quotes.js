@@ -43,8 +43,15 @@ function _getQuote(type) {
     console.error("getQuote()", `No API endpoint defined for ${type}`);
   }
 
+  let useEndpoint;
+  try {
+    useEndpoint = typeApiMap[type].useEndpoint;
+  } catch (e) {
+    useEndpoint = !!apiEndpointUrl;
+  }
+
   // if an endpoint was found, make an api call and return a promise for that call, with the type appended to the result
-  if (apiEndpointUrl && type.useEndpoint) {
+  if (apiEndpointUrl && useEndpoint) {
     const quote = fetch(apiEndpointUrl)
       .then((response) => response.json())
       .then((data) => ({
