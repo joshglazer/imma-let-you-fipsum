@@ -44,7 +44,7 @@ const quoteStyleMap = {
 
 const IndexPage = () => {
   const [paragraphs, setParagraphs] = useState([]);
-  const [paragraphsCount, setParagraphsCount] = useState(3);
+  const [paragraphsCount, _setParagraphsCount] = useState(3);
   const [isLoading, setIsLoading] = useState(false);
 
   async function generateText() {

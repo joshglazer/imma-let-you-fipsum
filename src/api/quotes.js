@@ -7,10 +7,12 @@ const KANYE_REST_API_ENDPOINT = "https://api.kanye.rest/";
 const typeApiMap = {
   "taylor swift": {
     endpoint: TAYLOR_REST_API_ENDPOINT,
+    useEndpoint: false,
     fallbackData: taylorSwiftQuotes,
   },
   "kanye west": {
     endpoint: KANYE_REST_API_ENDPOINT,
+    useEndpoint: true,
     fallbackData: kanyeWestQuotes,
   },
 };
@@ -18,6 +20,19 @@ const typeApiMap = {
 const KANYE_QUOTE_PREFIX = "Imma let you finish but";
 const KANYE_QUOTE_SKIP_TRANSFORMATION = ["I", "I'm", "I'd", "George"];
 const QUOTE_ENDING_PUNCTUATION = [".", "!", "?"];
+
+function _getFallbackData(type) {
+  try {
+    const fallbackData = typeApiMap[type].fallbackData;
+    const fallbackQuote = {
+      quote: fallbackData[Math.floor(Math.random() * fallbackData.length)],
+      type,
+    };
+    return fallbackQuote;
+  } catch {
+    console.error(`API Endpoint failed and no fallback Data setup for ${type}`);
+  }
+}
 
 // getQuote returns one quote that can be used in a paragraph
 function _getQuote(type) {
@@ -29,7 +44,7 @@ function _getQuote(type) {
   }
 
   // if an endpoint was found, make an api call and return a promise for that call, with the type appended to the result
-  if (apiEndpointUrl) {
+  if (apiEndpointUrl && type.useEndpoint) {
     const quote = fetch(apiEndpointUrl)
       .then((response) => response.json())
       .then((data) => ({
@@ -39,21 +54,11 @@ function _getQuote(type) {
       // If the api call failed for any reason, pull one of the hardcoded quotes from the locally stored list
       // and transform it to match the api response
       .catch(() => {
-        try {
-          const fallbackData = typeApiMap[type].fallbackData;
-          const fallbackQuote = {
-            quote:
-              fallbackData[Math.floor(Math.random() * fallbackData.length)],
-            type,
-          };
-          return fallbackQuote;
-        } catch {
-          console.error(
-            `API Endpoint failed and no fallback Data setup for ${type}`
-          );
-        }
+        return _getFallbackData(type);
       });
     return quote;
+  } else {
+    return _getFallbackData(type);
   }
 }
 
